@@ -18,14 +18,13 @@ bool unload(void);
 typedef struct NODE
 {
     bool isWord;
+    char letter;
     struct NODE *children[27];
 }
 node;
 
-
 int getIndex(char c);
-node* createNode(node* newNode);
-void createNode2(node *newNode);
-void unloadHelper(node *pointer);
+void createNode(node *cursor);
+void unloadHelper(node *pointer[]);
 
 #endif // DICTIONARY_H

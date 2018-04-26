@@ -1,5 +1,6 @@
 apple
 banana
+cat
 caterpillar
 dog
 elephant
@@ -11,8 +12,6 @@ jump
 kangaroo
 lobster
 monkey
-nuts
-octopus
 pirate
 quest
 run
