@@ -50,10 +50,12 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    head = createNode(cursor);
-    cursor = head;
-    int index=0;
-    int lastIndex=0;
+    node *follower;
+    cursor=malloc(sizeof(node));
+   head = createNode(cursor);
+   //each indicie corresponds to a letter in the alphabet and '
+    int index;
+
     FILE *dictPtr = fopen(dictionary,"r");
     if (!dictPtr)
     {
@@ -61,14 +63,11 @@ bool load(const char *dictionary)
         unload();
         return false;
     }
-    node* previous;
-    node* follower;
-    //for every dictionary word iterate through the trie
+   //for every dictionary word iterate through the trie
     for (char c = fgetc(dictPtr); c != EOF; c = fgetc(dictPtr))
     {
-
         follower=cursor;
-        //if not the end of the word
+            //if not the end of the word
         if (c >= 39)
         {
             index = getIndex(c);
@@ -77,10 +76,10 @@ bool load(const char *dictionary)
             //if the letter doesn't exist create a new node
                 if (cursor -> children[index] == NULL)
                 {
+                    cursor->children[index] = malloc(sizeof(node));
                     cursor -> children[index] = createNode(cursor -> children[index]);
                 }
-                   previous = cursor->children[index];
-                   lastIndex=index;
+
                    //continue to the next child
                     cursor = cursor -> children[index];
 
@@ -137,8 +136,7 @@ void unloadHelper(node *pointer)
 //Returns pointer to the initial value of the list
 node* createNode(node *newNode)
 {
-    newNode = malloc(sizeof(node));
-    newNode->isWord=false;
+
    for (int i = 0; i < 27; i++)
     {
         newNode->children[i] = NULL;
